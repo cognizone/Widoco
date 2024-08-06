@@ -131,13 +131,14 @@ public class Configuration {
 	 */
 	private boolean changeLogSuccessfullyCreated = true;
 
-	public Configuration() {
+	public Configuration(String tempFolderPath) {
 		initializeConfig();
 		try {
 			// create a temporal folder with all LODE resources
-			tmpFolder = new File("tmp" + new Date().getTime());
+			String prefix  = tempFolderPath.isEmpty() ? "" : tempFolderPath.concat(File.separator);
+			tmpFolder = new File(prefix + "tmp" + new Date().getTime());
 			tmpFolder.mkdir();
-			WidocoUtils.unZipIt(Constants.LODE_RESOURCES, tmpFolder.getName());
+			WidocoUtils.unZipIt(Constants.LODE_RESOURCES, tmpFolder.getCanonicalPath());
 		} catch (Exception ex) {
 			logger.error("Error while creating the temporal file for storing the intermediate Widoco files.");
 		}

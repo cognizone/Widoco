@@ -53,7 +53,7 @@ public final class GuiController {
 
 	public GuiController() {
 		this.state = State.initial;
-		config = new Configuration();
+		config = new Configuration("");
 		System.out.println("\n\n--WIzard for DOCumenting Ontologies (WIDOCO).\n https://w3id.org/widoco/\n");
 		System.out.println("\nYou are launching WIDOCO GUI\n");
 		System.out.println("\nTo use WIDOCO through the command line please type:\n");
@@ -86,6 +86,7 @@ public final class GuiController {
 		String confPath = "";
 		String code = null;// for tracking analytics.
 		String[] languages = null;
+		String tempFolderPath = "";
 		int i = 0;
 		while (i < args.length) {
 			String s = args[i];
@@ -163,6 +164,10 @@ public final class GuiController {
 				rb = args[i + 1];
 				i++;
 				break;
+			case "-tempFolderPath":
+				tempFolderPath = args[i + 1];
+        i++;
+        break;
 			case "-excludeIntroduction":
 				excludeIntroduction = true;
 				break;
@@ -180,7 +185,7 @@ public final class GuiController {
 			i++;
 		}
 		// this creates the tmp files
-		config = new Configuration();
+		config = new Configuration(tempFolderPath);
 		try {
 			this.config.reloadPropertyFile(confPath);
 		} catch (Exception e) {
