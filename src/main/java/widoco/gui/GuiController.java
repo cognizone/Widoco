@@ -297,7 +297,7 @@ public final class GuiController {
 		}
 		if (errors) {
 			// error code for notifying that there were errors.
-			System.exit(1);
+			throw new RuntimeException("Documentation generation resulted in error");
 		} else {
 			//logger.info("Documentation generated successfully");
 			System.out.println("Documentation generated successfully");
